@@ -1,0 +1,51 @@
+html {
+    background-color: cadetblue;
+}
+
+header,
+#top-paragraph {
+    text-align: center;
+}
+
+h1 {
+    background-color: darkcyan;
+    border: 3px solid seagreen;
+    border-radius: 50%;
+}
+
+#tab {
+    color: darkslategray;
+}
+
+#tab:hover {
+    color: chartreuse;
+}
+
+.header {
+    font-family: cursive;
+    color: #0035639a;
+}
+
+.text {
+    color: darkgreen;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#image-section {
+    background-color: darkcyan;
+    border: 3px solid seagreen;
+    padding: 10px;
+    width: 735px;
+    margin: 0 auto;
+}
+
+h2 {
+    background-color: darkcyan;
+    border: 3px solid seagreen;
+    border-radius: 50%;
+    width: 210px;
+}
+
+.image {
+    border-radius: 8px;
+}
