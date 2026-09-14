@@ -22,20 +22,23 @@ h1 {
 }
 
 .header {
-    font-family: cursive;
     color: #0035639a;
+    font-family: cursive;
+    text-decoration: underline;
 }
 
 .text {
     color: darkgreen;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    text-align: left;
 }
 
 #image-section {
     background-color: darkcyan;
     border: 3px solid seagreen;
     padding: 10px;
-    width: 735px;
+    width: 805px;
     margin: 0 auto;
 }
 
@@ -46,6 +49,15 @@ h2 {
     width: 210px;
 }
 
+ol {
+    background-color: darkcyan;
+    border: 3px solid seagreen;
+    display: flex;
+    flex-direction: column;
+}
+
 .image {
+    width: 400px;
+    height: auto;
     border-radius: 8px;
 }
