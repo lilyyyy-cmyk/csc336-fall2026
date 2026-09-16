@@ -56,9 +56,15 @@ div {
 
 ol li,
 ol img, 
-ol p {
+ol p,
+.otherSection {
     background-color: darkcyan;
     border: 3px solid seagreen;
+}
+
+.centerDiv {
+    margin: 0 auto;
+    width: 800px
 }
 
 .image {
