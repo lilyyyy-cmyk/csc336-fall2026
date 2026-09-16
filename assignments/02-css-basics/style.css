@@ -49,11 +49,16 @@ h2 {
     width: 210px;
 }
 
-ol {
+div {
+    display: flex;
+    width: 100%;
+}
+
+ol li,
+ol img, 
+ol p {
     background-color: darkcyan;
     border: 3px solid seagreen;
-    display: flex;
-    flex-direction: column;
 }
 
 .image {
