@@ -22,7 +22,8 @@ h1 {
 }
 
 .header {
-    color: #0035639a;
+    color: #004582;
+    text-shadow: 2px 2px darkblue;
     font-family: cursive;
     text-decoration: underline;
 }
