@@ -5,3 +5,7 @@ html {
 #roomObj {
     background-color: darkslateblue;
 }
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

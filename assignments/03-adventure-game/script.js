@@ -1,49 +1,53 @@
-const roomObject = {};
+let roomDiv = document.querySelector("#roomObj");
 
-const roomExits = {
-    gateExit: "Exits to the Nexus",
-    portalExit1: "Exits to the Marsh",
-    waterExit: "Exits to the Backyard",
-    portalExit2: "Exits to the Forest",
-    forestFloorExit: "Exits to the Marsh",
-    portalExit3: "Exits to the Arctic",
-    iceCaveExit: "Exits to the Nexus"
+const roomObject = {
+    room1: {
+        name: "Backyard",
+        description: "A habitat that brings forth many recognizable backyard birds",
+        roomExits: ["gateExit"]
+    },
+    room2: {
+        name: "Marsh",
+        description: "A habitat full of a variety of marsh birds",
+        roomExits: ["waterExit"]
+    },
+    room3: {
+        name: "Forest",
+        description: "A habitat containing numerous birds of the forest",
+        roomExits: ["forestFloorExit"]
+    },
+    room4: {
+        name: "Arctic",
+        description: "A habitat where birds of the arctic reside",
+        roomExits: ["iceCaveExit"]
+    }
 };
 
-let room1 = {
-    name: "Backyard",
-    description: "A habitat that brings forth many recognizable backyard birds",
-    room1Exits: [roomExits.gateExit, roomExits.portalExit1]
-};
+let currentRoom = roomObject["room1"];
 
-let room2 = {
-    name: "Marsh",
-    description: "A habitat full of a variety of marsh birds",
-    room2Exits: [roomExits.waterExit, roomExits.portalExit2]
-};
+function navButtonClick(e) {
+    console.log(e.target.innerHTML);
+    currentRoom = roomObject[e.target.innerHTML];
+    renderRooms(currentRoom);
+}
 
-let room3 = {
-    name: "Forest",
-    description: "A habitat containing numerous birds of the forest",
-    room3Exits: [roomExits.forestFloorExit, roomExits.portalExit3]
-};
+function renderRooms (room) {
+    roomDiv.innerHTML = "";
 
-let room4 = {
-    name: "Arctic",
-    description: "A habitat where birds of the arctic reside",
-    room4Exits: [roomExits.iceCaveExit]
-};
+    let roomHeading = document.createElement("h1");
+    roomHeading.innerHTML = room.name;
+    roomDiv.append(roomHeading);
 
-function addRoomsToDiv (room) {
-    let roomDiv = document.querySelector("#roomObj");
+    let roomDesc = document.createElement("p");
+    roomDesc.innerHTML = room.description;
+    roomDiv.append(roomDesc);
 
-    let room1Div = document.newElement("div");
-    let room1Heading = document.newElement("h1");
-    room1Heading.innerHTML = room1.name;
-    let room1Desc = document.newElement("p");
-    room1Desc.innerHTML = room1.description;
-    room1Div.append(room1Heading, room1Desc, room1.room1Exits);
-    roomDiv.append(room1Div);
-};
+    for (let i = 0; i < room.roomExits.length; i++) {
+        let navButton = document.createElement("button");
+        navButton.innerHTML = room.roomExits[i];
+        navButton.addEventListener("click", navButtonClick);
+        roomDiv.append(navButton);
+    }
+}
 
-roomDiv.append(roomObject);
+renderRooms(currentRoom);
