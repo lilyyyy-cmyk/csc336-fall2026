@@ -29,10 +29,32 @@ const roomObject = {
 
 let currentRoom = roomObject["backyard"];
 
+let inventory = [];
+let randomItems = ["Bird Whisperer (skill)", "Binoculars (item)", 
+                    "Bird Field Guide (item)", "Bird Seed (item)", 
+                    "Mimicry (skill)", "One with the Bird (skill)"];
+let item = randomItems[Math.floor(Math.random() * randomItems.length)];
+
 function navButtonClick(e) {
     console.log(e.target.innerHTML);
     currentRoom = roomObject[e.target.innerHTML];
     renderRooms(currentRoom);
+}
+
+function addToInventory(e) {
+    inventory.push(item);
+    console.log(e.target.src);
+    console.log(inventory);
+
+    let announcementP = document.createElement("p");
+    announcementP.innerHTML = `You got ${item} Inventory Item/Skill!`;
+    roomDiv.append(announcementP);
+
+    let inventoryList = document.createElement("ul");
+    let listItems = document.createElement("li");
+    listItems.innerHTML = item;
+    inventoryList.append(listItems);
+    roomDiv.append(inventoryList);
 }
 
 function renderRooms (room) {
@@ -48,6 +70,7 @@ function renderRooms (room) {
 
     let roomImage = document.createElement("img");
     roomImage.src = room.image;
+    roomImage.addEventListener("click", addToInventory);
     roomDiv.append(roomImage);
 
     for (let i = 0; i < room.linkedRooms.length; i++) {
