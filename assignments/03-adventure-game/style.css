@@ -1,11 +1,43 @@
 html {
-    background-color: lightslategray;
+    background-color: rgb(119, 153, 131);
 }
 
 #roomObj {
-    background-color: darkslateblue;
+    background-color: rgb(95, 160, 145);
+    display: flex;
+}
+
+h1,
+p,
+img,
+button {
+    margin: 10px;
+    padding: 5px;
+    background-color: rgb(0, 165, 165);
+    border: 3px solid darkcyan;
 }
 
 h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(37, 81, 53);
+    text-shadow: -2px 2px black;
+}
+
+p, 
+button {
+    font-family: "lucida console", "Arial Narrow Bold", sans-serif;
+    color: rgb(6, 59, 6);
+}
+
+img {
+    width: 800px;
+}
+
+button {
+    height: 50px;
+    border-radius: 25%;
+}
+
+button:hover {
+    background-color: darkcyan;
 }

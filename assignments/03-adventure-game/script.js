@@ -1,29 +1,33 @@
 let roomDiv = document.querySelector("#roomObj");
 
 const roomObject = {
-    room1: {
+    backyard: {
         name: "Backyard",
         description: "A habitat that brings forth many recognizable backyard birds",
-        roomExits: ["gateExit"]
+        image: "https://cdn.mos.cms.futurecdn.net/4ijgtjJ8kw6TJHUGmSSeEG.jpg",
+        linkedRooms: ["marsh"]
     },
-    room2: {
+    marsh: {
         name: "Marsh",
         description: "A habitat full of a variety of marsh birds",
-        roomExits: ["waterExit"]
+        image: "https://visitfairfield.com/wp-content/uploads/birds-in-flight-suisun-marsh.jpg",
+        linkedRooms: ["forest"]
     },
-    room3: {
+    forest: {
         name: "Forest",
         description: "A habitat containing numerous birds of the forest",
-        roomExits: ["forestFloorExit"]
+        image: "https://cdn.prod.website-files.com/623236d8ac23bb57bd352b40/623239955cdcbe16034cc9eb_Ara_chloropterus_-Peru_-flying-8e.jpeg",
+        linkedRooms: ["arctic"]
     },
-    room4: {
+    arctic: {
         name: "Arctic",
         description: "A habitat where birds of the arctic reside",
-        roomExits: ["iceCaveExit"]
+        image: "https://images.squarespace-cdn.com/content/v1/5bc75d83e4afe931ade4f0d8/1653594656674-Z7Y5HLLKMDJJJRV32WQG/unsplash-image-lf0_ZqMI0ZA.jpg",
+        linkedRooms: ["backyard"]
     }
 };
 
-let currentRoom = roomObject["room1"];
+let currentRoom = roomObject["backyard"];
 
 function navButtonClick(e) {
     console.log(e.target.innerHTML);
@@ -42,9 +46,13 @@ function renderRooms (room) {
     roomDesc.innerHTML = room.description;
     roomDiv.append(roomDesc);
 
-    for (let i = 0; i < room.roomExits.length; i++) {
+    let roomImage = document.createElement("img");
+    roomImage.src = room.image;
+    roomDiv.append(roomImage);
+
+    for (let i = 0; i < room.linkedRooms.length; i++) {
         let navButton = document.createElement("button");
-        navButton.innerHTML = room.roomExits[i];
+        navButton.innerHTML = room.linkedRooms[i];
         navButton.addEventListener("click", navButtonClick);
         roomDiv.append(navButton);
     }
