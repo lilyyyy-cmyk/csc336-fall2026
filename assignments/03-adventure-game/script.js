@@ -6,36 +6,28 @@ const roomObject = {
         description: "A habitat that brings forth many recognizable backyard birds",
         image: "https://cdn.mos.cms.futurecdn.net/4ijgtjJ8kw6TJHUGmSSeEG.jpg",
         linkedRooms: ["marsh", "arctic"],
-        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)", 
-                    "Bird Field Guide (item)", "Bird Seed (item)", 
-                    "Mimicry (skill)", "One with the Bird (skill)"]
+        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)"]
     },
     marsh: {
         name: "Marsh",
         description: "A habitat full of a variety of marsh birds",
         image: "https://visitfairfield.com/wp-content/uploads/birds-in-flight-suisun-marsh.jpg",
         linkedRooms: ["forest", "backyard"],
-        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)", 
-                    "Bird Field Guide (item)", "Bird Seed (item)", 
-                    "Mimicry (skill)", "One with the Bird (skill)"]
+        randomItems: ["Bird Field Guide (item)", "Bird Seed (item)"]
     },
     forest: {
         name: "Forest",
         description: "A habitat containing numerous birds of the forest",
         image: "https://cdn.prod.website-files.com/623236d8ac23bb57bd352b40/623239955cdcbe16034cc9eb_Ara_chloropterus_-Peru_-flying-8e.jpeg",
         linkedRooms: ["arctic", "marsh"],
-        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)", 
-                    "Bird Field Guide (item)", "Bird Seed (item)", 
-                    "Mimicry (skill)", "One with the Bird (skill)"]
+        randomItems: ["Mimicry (skill)", "One with the Bird (skill)"]
     },
     arctic: {
         name: "Arctic",
         description: "A habitat where birds of the arctic reside",
         image: "https://images.squarespace-cdn.com/content/v1/5bc75d83e4afe931ade4f0d8/1653594656674-Z7Y5HLLKMDJJJRV32WQG/unsplash-image-lf0_ZqMI0ZA.jpg",
         linkedRooms: ["backyard", "forest"],
-        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)", 
-                    "Bird Field Guide (item)", "Bird Seed (item)", 
-                    "Mimicry (skill)", "One with the Bird (skill)"]
+        randomItems: ["Feather (item)", "Bird Perch (skill)"]
     }
 };
 
@@ -52,27 +44,31 @@ function navButtonClick(e) {
 }
 
 function addToInventory(e) {
-        if (currentRoom.randomItems.length === 0) {
+    let roomDiv3 = document.createElement("div");
+    roomDiv3.id = "div3";
+    roomDiv.append(roomDiv3);
+    
+    if (currentRoom.randomItems.length === 0) {
+        announcementP.innerHTML = "All items/skills picked up!";
+        roomDiv3.append(announcementP);
+        roomDiv3.append(inventoryList);
         return;
     }
     
     let index = Math.floor(Math.random() * currentRoom.randomItems.length);
     let item = currentRoom.randomItems[index];
+
     inventory.push(item);
     console.log(e.target.src);
     console.log(inventory);
 
-        let itemsLeft = [];
+    let itemsLeft = [];
     for (let i = 0; i < currentRoom.randomItems.length; i++) {
         if (i != index) {
             itemsLeft.push(currentRoom.randomItems[i]);
         }
     }
     currentRoom.randomItems = itemsLeft;
-
-    let roomDiv3 = document.createElement("div");
-    roomDiv3.id = "div3";
-    roomDiv.append(roomDiv3);
 
     announcementP.innerHTML = `You got ${item} Inventory Item/Skill!`;
     roomDiv3.append(announcementP);
