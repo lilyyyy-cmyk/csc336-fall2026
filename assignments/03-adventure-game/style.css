@@ -1,17 +1,22 @@
 html {
     background-color: rgb(119, 153, 131);
+    
 }
 
 #roomObj {
     background-color: rgb(95, 160, 145);
-    display: flex;
-    align-items: flex-start;
 }
 
-#div2,
-#div3 {
+#div2 {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#roomObj,
+#div2 {
+    width: 825px;
+    margin: 0 auto;
 }
 
 h1,
@@ -30,6 +35,7 @@ h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(37, 81, 53);
     text-shadow: -2px 2px black;
+    text-align: center;
 }
 
 p, 
@@ -41,7 +47,12 @@ li {
 }
 
 p {
-    width: 115px;
+    width: 300px;
+    text-align: center;
+}
+
+ul {
+    width: 100px;
 }
 
 li {

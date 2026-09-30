@@ -6,28 +6,32 @@ const roomObject = { //an room object that contains each specific room object
         description: "A habitat that brings forth many recognizable backyard birds",
         image: "https://cdn.mos.cms.futurecdn.net/4ijgtjJ8kw6TJHUGmSSeEG.jpg",
         linkedRooms: ["marsh", "arctic"],
-        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)"]
+        randomItems: ["Bird Whisperer (skill)", "Binoculars (item)"],
+        otherDesc: ["A Painted Bunting wishes you good fortune"]
     },
     marsh: {
         name: "Marsh",
         description: "A habitat full of a variety of marsh birds",
         image: "https://visitfairfield.com/wp-content/uploads/birds-in-flight-suisun-marsh.jpg",
         linkedRooms: ["forest", "backyard"],
-        randomItems: ["Bird Field Guide (item)", "Bird Seed (item)"]
+        randomItems: ["Bird Field Guide (item)", "Bird Seed (item)"],
+        otherDesc: ["The American White Pelicans appreciate your visit"]
     },
     forest: {
         name: "Forest",
         description: "A habitat containing numerous birds of the forest",
         image: "https://cdn.prod.website-files.com/623236d8ac23bb57bd352b40/623239955cdcbe16034cc9eb_Ara_chloropterus_-Peru_-flying-8e.jpeg",
         linkedRooms: ["arctic", "marsh"],
-        randomItems: ["Mimicry (skill)", "One with the Bird (skill)"]
+        randomItems: ["Mimicry (skill)", "One with the Bird (skill)"],
+        otherDesc: ["The Scarlet Macaws saved you some fruit"]
     },
     arctic: {
         name: "Arctic",
         description: "A habitat where birds of the arctic reside",
         image: "https://images.squarespace-cdn.com/content/v1/5bc75d83e4afe931ade4f0d8/1653594656674-Z7Y5HLLKMDJJJRV32WQG/unsplash-image-lf0_ZqMI0ZA.jpg",
         linkedRooms: ["backyard", "forest"],
-        randomItems: ["Feather (item)", "Bird Perch (skill)"]
+        randomItems: ["Feather (item)", "Bird Perch (skill)"],
+        otherDesc: ["The Arctic Terns would like to guide you to their home"]
     }
 };
 
@@ -37,10 +41,20 @@ let inventory = []; //an array that eventually holds all inventory items
 let inventoryList = document.createElement("ul");
 let announcementP = document.createElement("p");
 
+let roomDesc;
+
 function navButtonClick(e) { //function for the buttons, allows for proper navigation
     console.log(e.target.innerHTML);
     currentRoom = roomObject[e.target.innerHTML];
     renderRooms(currentRoom);
+}
+
+function wisdomButtonClick(e) { //function for iterating through changed descriptions to show once the button is clicked
+    console.log(e.target.innerHTML);
+
+    for (let i = 0; i < currentRoom.otherDesc.length; i++) {
+        roomDesc.innerHTML = currentRoom.otherDesc[i];
+    }
 }
 
 function addToInventory(e) { //function for clicking and gaining inventory items 
@@ -71,33 +85,28 @@ function addToInventory(e) { //function for clicking and gaining inventory items
     currentRoom.randomItems = itemsLeft;
 
     announcementP.innerHTML = `You got ${item} Inventory Item/Skill!`; //announcement received when image is clicked
-    roomDiv3.append(announcementP);
+    roomDiv.append(announcementP);
 
     let listItems = document.createElement("li"); 
     listItems.innerHTML = item; //puts items in a list
     inventoryList.append(listItems);
-    roomDiv3.append(inventoryList); 
+    roomDiv.append(inventoryList); 
 }
 
 function renderRooms(room) { //function that renders the rooms
     roomDiv.innerHTML = "";
 
-    let roomDiv2 = document.createElement("div");
-    roomDiv2.id = "div2";
-    roomDiv.append(roomDiv2);
-
     let roomHeading = document.createElement("h1"); 
     roomHeading.innerHTML = room.name; //room.name property is the room heading
     roomDiv.append(roomHeading);
 
-    let roomDesc = document.createElement("p");
+    roomDesc = document.createElement("p");
     roomDesc.innerHTML = room.description; //room.description property is the room description
-    roomDiv2.append(roomDesc);
+    roomDiv.append(roomDesc);
 
-    let roomImage = document.createElement("img");
-    roomImage.src = room.image; //room.image is the image source for the room image
-    roomImage.addEventListener("click", addToInventory); //allows for the image to be clicked on
-    roomDiv.append(roomImage);
+    let roomDiv2 = document.createElement("div");
+    roomDiv2.id = "div2";
+    roomDiv.append(roomDiv2);
 
     for (let i = 0; i < room.linkedRooms.length; i++) { //allows for the iteration through the linkedRooms array through the room objects
         let navButton = document.createElement("button");
@@ -105,6 +114,16 @@ function renderRooms(room) { //function that renders the rooms
         navButton.addEventListener("click", navButtonClick); //allows for the buttons to be clicked
         roomDiv2.append(navButton);
     }
+
+    let wisdomButton = document.createElement("button"); //allows for wisdom button to be created and then clicked
+    wisdomButton.innerHTML = "wisdom";
+    wisdomButton.addEventListener("click", wisdomButtonClick);
+    roomDiv2.append(wisdomButton);
+
+    let roomImage = document.createElement("img");
+    roomImage.src = room.image; //room.image is the image source for the room image
+    roomImage.addEventListener("click", addToInventory); //allows for the image to be clicked on
+    roomDiv.append(roomImage);
 }
 
 renderRooms(currentRoom); //renders current room
