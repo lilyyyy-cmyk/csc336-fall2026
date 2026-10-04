@@ -1,0 +1,40 @@
+html {
+    background-color: burlywood;
+}
+
+#header,
+#mainShop,
+#cart {
+    text-align: center;
+}
+
+#mainShop,
+#cart {
+    margin: 10px;
+}
+
+#header {
+    background-color: chocolate;
+}
+
+#encapsule {
+    display: flex;
+}
+
+#mainShop {
+    display: grid;
+    background-color: chocolate;
+    width: 800px;
+}
+
+#cart {
+    display: grid;
+    background-color: chocolate;
+    width: 400px;
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(118, 30, 30);
+    border: 3px solid rgb(118, 30, 30);
+}
