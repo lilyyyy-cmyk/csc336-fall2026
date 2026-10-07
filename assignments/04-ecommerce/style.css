@@ -11,6 +11,7 @@ html {
 #mainShop,
 #cart {
     margin: 10px;
+    border: 3px solid rgb(118, 30, 30);
 }
 
 #header {
@@ -40,16 +41,44 @@ html {
     border: 3px solid rgb(118, 30, 30);
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(60, 15, 15);
+    padding: 10px
 }
 
 #cart {
     background-color: chocolate;
+    padding: 10px;
+    text-align: center;
     width: 400px;
     display: grid;
+    grid-template-columns: auto;
+}
+
+.inCart {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
+    padding: 10px;
+}
+
+.inCart div {
+    border: 3px solid rgb(118, 30, 30);
+    padding: 10px;
 }
 
 h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(118, 30, 30);
     border: 3px solid rgb(118, 30, 30);
+}
+
+button {
+    background-color: rgb(118, 30, 30);
+    color: bisque;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: oblique;
+    border: 1px solid rgb(60, 15, 15);
+}
+
+button:hover {
+    background-color: rgb(168, 43, 43);
+    border: 1px solid rgb(118, 29, 29);
 }

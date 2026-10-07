@@ -38,7 +38,7 @@ const objArray = [
     {
         name: "Bird Plush",
         price: "$15.99",
-        description: "A Various Bird Plush",
+        description: "A Bird Plush",
         image: "",
         category: "Toys"
     },
@@ -88,12 +88,20 @@ mainShopDiv.append(cardDiv);
 //cart organization
 const cartDiv = document.createElement("div");
 cartDiv.id = "cart";
+encapsuleDiv.append(cartDiv);
+
+const cartHeaderDiv = document.createElement("div");
+cartHeaderDiv.id = "cartHeader";
 
 const cartHeader = document.createElement("h1");
 cartHeader.innerHTML = "Cart";
-cartDiv.append(cartHeader);
-encapsuleDiv.append(cartDiv)
-rootDiv.append(encapsuleDiv);
+cartHeaderDiv.append(cartHeader);
+cartDiv.append(cartHeaderDiv);
+
+const inCartDiv = document.createElement("div");
+inCartDiv.classList = "inCart";
+cartDiv.append(inCartDiv);
+
 
 //shop functions, etc.
 const addObjToCard = (product) => {
@@ -116,6 +124,14 @@ const addObjToCard = (product) => {
     let cardDesc = document.createElement("p");
     cardDesc.innerHTML = product.description;
     innerCardDiv.append(cardDesc);
+
+    let cardButton = document.createElement("button");
+    cardButton.innerHTML = "Add to Cart";
+    innerCardDiv.append(cardButton);
+
+    cardButton.addEventListener("click", () => {
+        inCartDiv.append(innerCardDiv);
+    });
 }
 
 objArray.forEach(element => addObjToCard(element));
