@@ -104,6 +104,31 @@ cartDiv.append(inCartDiv);
 
 
 //shop functions, etc.
+const createCheckbox = (obj) => {
+    let cardCheckBox = document.createElement("input");
+    cardCheckBox.setAttribute("type", "checkbox");
+    cardCheckBox.classList = "cardCheckbox";
+    obj.append(cardCheckBox);
+
+    //whenCheckbox(cardCheckBox);
+}
+
+// const whenCheckbox = (e) => {
+//     e.addEventListener("change", () => {
+//         e.toggle("selected", e.checked);
+//     })
+// }
+
+const createButton = (obj) => {
+    let cardButton = document.createElement("button");
+    cardButton.innerHTML = "Add to Cart";
+    obj.append(cardButton);
+
+    cardButton.addEventListener("click", () => {
+        inCartDiv.append(obj);
+    });
+}
+
 const addObjToCard = (product) => {
     let innerCardDiv = document.createElement("div");
     innerCardDiv.value = product;
@@ -125,13 +150,8 @@ const addObjToCard = (product) => {
     cardDesc.innerHTML = product.description;
     innerCardDiv.append(cardDesc);
 
-    let cardButton = document.createElement("button");
-    cardButton.innerHTML = "Add to Cart";
-    innerCardDiv.append(cardButton);
-
-    cardButton.addEventListener("click", () => {
-        inCartDiv.append(innerCardDiv);
-    });
+    createButton(innerCardDiv);
+    createCheckbox(innerCardDiv);
 }
 
 objArray.forEach(element => addObjToCard(element));

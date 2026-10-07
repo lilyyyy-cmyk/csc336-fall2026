@@ -64,6 +64,10 @@ html {
     padding: 10px;
 }
 
+/* .cardCheckbox.checked {
+    background-color: rgb(168, 43, 43);
+} */
+
 h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(118, 30, 30);
