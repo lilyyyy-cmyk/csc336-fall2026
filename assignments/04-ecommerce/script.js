@@ -118,6 +118,4 @@ const addObjToCard = (product) => {
     innerCardDiv.append(cardDesc);
 }
 
-for (let obj of objArray) {
-    addObjToCard(obj);
-}
+objArray.forEach(element => addObjToCard(element));
