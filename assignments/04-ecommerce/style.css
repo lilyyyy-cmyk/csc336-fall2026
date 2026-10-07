@@ -22,15 +22,30 @@ html {
 }
 
 #mainShop {
-    display: grid;
     background-color: chocolate;
     width: 800px;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.card {
+    background-color: chocolate;
+    padding: 10px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.card div {
+    border: 3px solid rgb(118, 30, 30);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
 }
 
 #cart {
-    display: grid;
     background-color: chocolate;
     width: 400px;
+    display: grid;
 }
 
 h1 {
