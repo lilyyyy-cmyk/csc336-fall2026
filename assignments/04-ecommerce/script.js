@@ -79,9 +79,13 @@ mainShopHeaderDiv.append(mainShopHeader);
 mainShopDiv.append(mainShopHeaderDiv);
 encapsuleDiv.append(mainShopDiv);
 
+const buttonDiv = document.createElement("div");
+buttonDiv.id = "buttonDiv";
+mainShopDiv.append(buttonDiv);
+
 //card organization 
 const cardDiv = document.createElement("div");
-cardDiv.classList = "card";
+cardDiv.classList.add("card");
 
 mainShopDiv.append(cardDiv);
 
@@ -107,17 +111,20 @@ cartDiv.append(inCartDiv);
 const createCheckbox = (obj) => {
     let cardCheckBox = document.createElement("input");
     cardCheckBox.setAttribute("type", "checkbox");
-    cardCheckBox.classList = "cardCheckbox";
+    cardCheckBox.classList.add("cardCheckbox");
     obj.append(cardCheckBox);
 
-    //whenCheckbox(cardCheckBox);
+    cardCheckBox.addEventListener("change", () => {
+        obj.classList.toggle("selected", cardCheckBox.checked);
+    })
+    obj.append(cardCheckBox);
 }
 
-// const whenCheckbox = (e) => {
-//     e.addEventListener("change", () => {
-//         e.toggle("selected", e.checked);
-//     })
-// }
+const createSMButton = () => {
+    let selectedButton = document.createElement("button");
+    selectedButton.innerHTML = "Add Selected to Cart";
+    buttonDiv.append(selectedButton);
+}
 
 const createButton = (obj) => {
     let cardButton = document.createElement("button");
@@ -155,3 +162,5 @@ const addObjToCard = (product) => {
 }
 
 objArray.forEach(element => addObjToCard(element));
+
+createSMButton();
