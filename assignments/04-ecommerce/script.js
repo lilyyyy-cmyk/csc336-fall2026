@@ -83,6 +83,12 @@ const buttonDiv = document.createElement("div");
 buttonDiv.id = "buttonDiv";
 mainShopDiv.append(buttonDiv);
 
+let selectedButton = document.createElement("button");
+selectedButton.innerHTML = "Add Selected to Cart";
+buttonDiv.append(selectedButton);
+
+let cardCheckBox;
+
 //card organization 
 const cardDiv = document.createElement("div");
 cardDiv.classList.add("card");
@@ -106,25 +112,45 @@ const inCartDiv = document.createElement("div");
 inCartDiv.classList = "inCart";
 cartDiv.append(inCartDiv);
 
+//more array(s)
+let cardArray = [];
+
 
 //shop functions, etc.
-const createCheckbox = (obj) => {
+const checkbox = (obj) => {
     let cardCheckBox = document.createElement("input");
     cardCheckBox.setAttribute("type", "checkbox");
     cardCheckBox.classList.add("cardCheckbox");
-    obj.append(cardCheckBox);
+    obj.checkbox = cardCheckBox;
 
     cardCheckBox.addEventListener("change", () => {
-        obj.classList.toggle("selected", cardCheckBox.checked);
+        if (cardCheckBox.checked) {
+            obj.classList.add("selected");
+            cardArray.push(obj);
+        } else {
+            obj.classList.remove("selected");
+            cardArray = cardArray.filter((card) => card !== obj);
+        }
+
+        if (cardArray.length > 0) {
+            selectedButton.innerHTML = "Add " + cardArray.length + " item(s) to Cart";
+        } else {
+            selectedButton.innerHTML = "Add Selected to Cart";
+        }
     })
     obj.append(cardCheckBox);
 }
 
-const createSMButton = () => {
-    let selectedButton = document.createElement("button");
+selectedButton.addEventListener("click", () => {
+    for (let i = 0; i < cardArray.length; i++) {
+        let card = cardArray[i];
+        card.classList.remove("selected");
+        card.checkbox.checked = false;
+        inCartDiv.append(card);
+    }
+    cardArray = [];
     selectedButton.innerHTML = "Add Selected to Cart";
-    buttonDiv.append(selectedButton);
-}
+})
 
 const createButton = (obj) => {
     let cardButton = document.createElement("button");
@@ -158,9 +184,7 @@ const addObjToCard = (product) => {
     innerCardDiv.append(cardDesc);
 
     createButton(innerCardDiv);
-    createCheckbox(innerCardDiv);
+    checkbox(innerCardDiv);
 }
 
 objArray.forEach(element => addObjToCard(element));
-
-createSMButton();
