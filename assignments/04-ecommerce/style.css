@@ -53,7 +53,8 @@ html {
     grid-template-columns: auto;
 }
 
-.inCart {
+.inCart,
+#price {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: rgb(60, 15, 15);
     padding: 10px;
@@ -70,7 +71,7 @@ html {
 
 h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: rgb(118, 30, 30);
+    color: rgb(60, 15, 15);
     border: 3px solid rgb(118, 30, 30);
 }
 
@@ -85,4 +86,8 @@ button {
 button:hover {
     background-color: rgb(168, 43, 43);
     border: 1px solid rgb(118, 29, 29);
+}
+
+img {
+    width: 100px;
 }
