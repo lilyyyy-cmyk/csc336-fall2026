@@ -173,11 +173,11 @@ const createButton = (obj) => {
 }
 
 const updatePrice = () => {
+    let prices = cartArray.map((card) => card.value.price)
     let total = 0;
 
-    for (let i = 0; i < cartArray.length; i++) {
-        let priceNum = cartArray[i].value.price;
-        total = total + priceNum;
+    for (let i = 0; i < prices.length; i++) {
+        total = total + prices[i];
     }
     priceDiv.innerHTML = `Total: $${total} (${cartArray.length} item(s))`;
 }
