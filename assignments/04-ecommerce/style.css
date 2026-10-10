@@ -69,23 +69,32 @@ html {
     background-color: rgb(180, 91, 27);
 }
 
-h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: rgb(60, 15, 15);
-    border: 3px solid rgb(118, 30, 30);
+.hidden {
+    display: none;
 }
 
-button {
+button,
+select,
+option {
     background-color: rgb(118, 30, 30);
     color: bisque;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-style: oblique;
     border: 1px solid rgb(60, 15, 15);
+    margin: 5px;
 }
 
-button:hover {
+button:hover,
+select:hover,
+option:hover {
     background-color: rgb(168, 43, 43);
     border: 1px solid rgb(118, 29, 29);
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
+    border: 3px solid rgb(118, 30, 30);
 }
 
 img {

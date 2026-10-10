@@ -53,6 +53,7 @@ const objArray = [
 ];
 
 //top header organization
+//header div with title
 const topHeaderDiv = document.createElement("div");
 topHeaderDiv.id = "header";
 
@@ -62,11 +63,13 @@ topHeaderDiv.append(topHeader);
 rootDiv.append(topHeaderDiv);
 
 //encapsulation div
+//encapsules the mainShopDiv and cartDiv
 const encapsuleDiv = document.createElement("div");
 encapsuleDiv.id = "encapsule";
 rootDiv.append(encapsuleDiv);
 
 //main shop organization 
+//contains main div, header div, and button div
 const mainShopDiv = document.createElement("div");
 mainShopDiv.id = "mainShop";
 
@@ -83,19 +86,19 @@ const buttonDiv = document.createElement("div");
 buttonDiv.id = "buttonDiv";
 mainShopDiv.append(buttonDiv);
 
-let selectedButton = document.createElement("button");
+let selectedButton = document.createElement("button"); //add to cart button
 selectedButton.innerHTML = "Add Selected to Cart";
 buttonDiv.append(selectedButton);
 
-let cardCheckBox;
-
 //card organization 
+//div for the cards
 const cardDiv = document.createElement("div");
 cardDiv.classList.add("card");
 
 mainShopDiv.append(cardDiv);
 
 //cart organization
+//main cart div, header div, when in cart div, and price div (for separation purposes)
 const cartDiv = document.createElement("div");
 cartDiv.id = "cart";
 encapsuleDiv.append(cartDiv);
@@ -118,11 +121,13 @@ cartDiv.append(priceDiv);
 priceDiv.innerHTML = "Total: $0.00 (0 items)";
 
 //more array(s)
-let cardArray = [];
-let cartArray = [];
+let cardArray = []; //for the cards in the mainShopDiv
+let cartArray = []; //for the cards in the cartDiv
+let cateArray = []; //for dropdown and hiding cards
 
 
 //shop functions, etc.
+//checkbox function
 const checkbox = (obj) => {
     let cardCheckBox = document.createElement("input");
     cardCheckBox.setAttribute("type", "checkbox");
@@ -130,81 +135,110 @@ const checkbox = (obj) => {
     obj.checkbox = cardCheckBox;
 
     cardCheckBox.addEventListener("change", () => {
-        if (cardCheckBox.checked) {
+        if (cardCheckBox.checked) { //if a box is checked or not
             obj.classList.add("selected");
-            cardArray.push(obj);
+            cardArray.push(obj); //adds to cardArray
         } else {
             obj.classList.remove("selected");
-            cardArray = cardArray.filter((card) => card !== obj);
+            cardArray = cardArray.filter((card) => card !== obj); //removes unselected cards from array
         }
 
         if (cardArray.length > 0) {
-            selectedButton.innerHTML = "Add " + cardArray.length + " item(s) to Cart";
+            selectedButton.innerHTML = "Add " + cardArray.length + " item(s) to Cart"; //updates how many items are in the cart
         } else {
-            selectedButton.innerHTML = "Add Selected to Cart";
+            selectedButton.innerHTML = "Add Selected to Cart"; //when selected cards is 0
         }
     })
-    obj.append(cardCheckBox);
+    obj.append(cardCheckBox); 
 }
 
 selectedButton.addEventListener("click", () => {
-    for (let i = 0; i < cardArray.length; i++) {
+    for (let i = 0; i < cardArray.length; i++) { 
         let card = cardArray[i];
         card.classList.remove("selected");
         card.checkbox.checked = false;
         inCartDiv.append(card);
-        cartArray.push(card);
+        cartArray.push(card); //pushes card into cartArray in cartDiv
     }
-    cardArray = [];
-    selectedButton.innerHTML = "Add Selected to Cart";
-    updatePrice();
+    cardArray = []; //empties array
+    selectedButton.innerHTML = "Add Selected to Cart"; //after clicking once
+    updatePrice(); //updates to price
 })
 
 const createButton = (obj) => {
     let cardButton = document.createElement("button");
-    cardButton.innerHTML = "Add to Cart";
-    obj.append(cardButton);
+    cardButton.innerHTML = "Add to Cart"; //add to cart button
+    obj.append(cardButton); //adds button to card
 
     cardButton.addEventListener("click", () => {
-        inCartDiv.append(obj);
-        cartArray.push(obj)
-        updatePrice();
+        inCartDiv.append(obj); 
+        cartArray.push(obj); //adds card to cartArray
+        updatePrice(); //updates price
     });
 }
 
 const updatePrice = () => {
-    let prices = cartArray.map((card) => card.value.price)
+    let prices = cartArray.map((card) => card.value.price) //map the price of a specific card
     let total = 0;
 
     for (let i = 0; i < prices.length; i++) {
-        total = total + prices[i];
+        total = total + prices[i]; //adds current total to an indexed price
     }
-    priceDiv.innerHTML = `Total: $${total} (${cartArray.length} item(s))`;
+    priceDiv.innerHTML = `Total: $${total} (${cartArray.length} item(s))`; //updates total and shows number of items in cart
 }
 
-const addObjToCard = (product) => {
-    let innerCardDiv = document.createElement("div");
+const showCategory = () => {
+    let aCategory = document.createElement("select"); //select for dropdown
+
+    let allOptions = document.createElement("option"); //option in dropdown
+    allOptions.value = "All"; //every card
+    allOptions.innerHTML = "All";
+    aCategory.append(allOptions); //puts option in the dropdown
+
+    objArray.forEach((product) => {
+        let option = document.createElement("option"); //options in dropdown
+        option.value = product.category; //card-specific category value
+        option.innerHTML = product.category;
+        aCategory.append(option); //puts options in the dropdown
+    });
+
+    buttonDiv.append(aCategory); //put dropdown next to button
+
+    aCategory.addEventListener("change", () => {
+        cateArray.forEach((card) => card.classList.remove("hidden")); //removes classlist for each card
+
+        if (aCategory.value !== "All") {
+            let hide = cateArray.filter((card) => card.value.category !== aCategory.value); //hides if the card category isn't the selected value
+            hide.forEach((card) => card.classList.add("hidden")); //actually allows for cards to be hidden (in CSS)
+        }
+    });
+}
+
+const addObjToCard = (product) => { //render cards function
+    let innerCardDiv = document.createElement("div"); //div that holds the card's info
     innerCardDiv.value = product;
     cardDiv.append(innerCardDiv);
+    cateArray.push(innerCardDiv); //move entire category array into div
 
     let cardHeading = document.createElement("h2");
     cardHeading.innerHTML = product.name;
     innerCardDiv.append(cardHeading);
 
     let cardImg = document.createElement("img");
-    cardImg.src = product.image;
+    cardImg.src = product.image; //shows specific image of product
     innerCardDiv.append(cardImg);
 
     let cardPrice = document.createElement("p");
-    cardPrice.innerHTML = product.price;
+    cardPrice.innerHTML = product.price; //shows price of specific product
     innerCardDiv.append(cardPrice);
 
     let cardDesc = document.createElement("p");
     cardDesc.innerHTML = product.description;
     innerCardDiv.append(cardDesc);
 
-    createButton(innerCardDiv);
-    checkbox(innerCardDiv);
+    createButton(innerCardDiv); //puts the button in the div
+    checkbox(innerCardDiv); //puts the dropdown in the div
 }
 
-objArray.forEach(element => addObjToCard(element));
+objArray.forEach(element => addObjToCard(element)); //allows for each object to be shown on a card, allows for buttons on every card
+showCategory(); //shows the dropdown
