@@ -1,0 +1,113 @@
+html {
+    background-color: burlywood;
+}
+
+#header,
+#mainShop,
+#cart {
+    text-align: center;
+}
+
+#mainShop,
+#cart,
+#new {
+    margin: 10px;
+    border: 3px solid rgb(118, 30, 30);
+}
+
+#header {
+    background-color: chocolate;
+}
+
+#encapsule {
+    display: flex;
+}
+
+#mainShop {
+    background-color: chocolate;
+    width: 800px;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+#new {
+    background-color: chocolate;
+    padding: 10px;
+}
+
+.card {
+    background-color: chocolate;
+    padding: 10px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.card div,
+#new {
+    border: 3px solid rgb(118, 30, 30);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
+    padding: 10px
+}
+
+#cart {
+    background-color: chocolate;
+    padding: 10px;
+    text-align: center;
+    width: 400px;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.inCart,
+#price {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
+    padding: 10px;
+}
+
+.inCart div {
+    border: 3px solid rgb(118, 30, 30);
+    padding: 10px;
+}
+
+.card div.selected {
+    background-color: rgb(180, 91, 27);
+}
+
+.hidden {
+    display: none;
+}
+
+button,
+select,
+option,
+input,
+textarea {
+    background-color: rgb(118, 30, 30);
+    color: bisque;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: oblique;
+    border: 1px solid rgb(60, 15, 15);
+    margin: 5px;
+}
+
+button:hover,
+select:hover,
+option:hover,
+input:hover,
+textarea:hover {
+    background-color: rgb(168, 43, 43);
+    border: 1px solid rgb(118, 29, 29);
+}
+
+h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(60, 15, 15);
+    border: 3px solid rgb(118, 30, 30);
+}
+
+img {
+    width: 100px;
+}
