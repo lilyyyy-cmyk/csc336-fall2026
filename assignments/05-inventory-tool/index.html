@@ -10,15 +10,15 @@
         <div id="new">
             <form id="newProduct">
                 <label for="name">Product Name:</label>
-                <input id="product" type="text" name="name" placeholder="Enter Product..."><br>
+                <input id="productName" type="text" name="name" placeholder="Enter Product..." required><br>
                 <label for="price">Product Price:</label>
-                <input id="product" type="number" min="0.00" step="0.01" name="price" placeholder="Enter Price..."><br>
+                <input id="productPrice" type="number" min="0.00" step="0.01" name="price" placeholder="Enter Price..." required><br>
                 <label for="description">Product Description:</label>
-                <textarea name="description" id="product" placeholder="Enter Description..."></textarea><br>
+                <textarea name="description" id="productDesc" placeholder="Enter Description..." required></textarea><br>
                 <label for="image">Product Image:</label>
-                <input id="product" type="url" name="image" placeholder="Enter Image URL..."><br>
+                <input id="productImg" type="url" name="image" placeholder="Enter Image URL..." required><br>
                 <label for="category">Product Category:</label>
-                <select name="category" id="product" placeholder="Select Category"></select><br>
+                <select name="category" id="productCate" placeholder="Select Category" required></select><br>
                 <input type="submit" value="Submit Product">
             </form>
         </div>

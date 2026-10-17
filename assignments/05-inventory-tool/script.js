@@ -128,16 +128,44 @@ const newProductHeader = document.createElement("h1");
 newProductHeader.innerHTML = "Add a New Product"
 newProductDiv.prepend(newProductHeader);
 
+let productForm = document.querySelector("#newProduct");
+let productName = document.querySelector("#productName");
+let productPrice = document.querySelector("#productPrice");
+let productDesc = document.querySelector("#productDesc");
+let productImg = document.querySelector("#productImg");
+let productCate = document.querySelector("#productCate");
+let localStorageKey = "products";
+
 //more array(s)
 let cardArray = []; //for the cards in the mainShopDiv
 let cartArray = []; //for the cards in the cartDiv
 let cateArray = []; //for dropdown and hiding cards
-let newProductArray = []; //for new products
 
 
 //shop functions, etc.
-const addProductToCard = (obj) => {
+productForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
+    let newProductObj = {
+        name: productName.value,
+        price: Number(productPrice.value),
+        description: productDesc.value,
+        image: productImg.value,
+        category: productCate.value
+    }
+    objArray.push(newProductObj);
+    addObjToCard(newProductObj);
+
+    productForm.reset(); //resets all form fields
+});
+
+const addOptionsToSelect = () => {
+    objArray.forEach((product) => {
+        let option = document.createElement("option"); //options in dropdown
+        option.value = product.category; //card-specific category value
+        option.innerHTML = product.category;
+        productCate.append(option); //puts options in the new product dropdown
+    });
 }
 
 //checkbox function
@@ -255,3 +283,4 @@ const addObjToCard = (product) => { //render cards function
 
 objArray.forEach(element => addObjToCard(element)); //allows for each object to be shown on a card, allows for buttons on every card
 showCategory(); //shows the dropdown
+addOptionsToSelect(); //shows new product dropdown
