@@ -3,7 +3,7 @@ const rootDiv = document.querySelector("#root");
 const newProductDiv = document.querySelector("#new");
 
 //card objects
-const objArray = [
+let objArray = [
     {
         name: "Bird Nocs",
         price: 200.99,
@@ -146,18 +146,36 @@ let cateArray = []; //for dropdown and hiding cards
 productForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    let newProductObj = {
+    let newName = productName.value.trim(); //gets rid of the extra space add the end
+
+    let nameMatches = objArray.filter((product) => { //filters through product objects
+        return product.name.toLowerCase() === newName.toLowerCase(); //checks if any object names equal the new name
+    })
+
+    if (nameMatches.length > 0) { //if a object name was added to the filtered array
+        alert("A Product Named " + newName + " Already Exists");
+        return;
+    }
+
+    let newProductObj = { //new product object
         name: productName.value,
         price: Number(productPrice.value),
         description: productDesc.value,
         image: productImg.value,
         category: productCate.value
     }
-    objArray.push(newProductObj);
-    addObjToCard(newProductObj);
+
+    objArray.push(newProductObj); //adds the new product object to the original object array
+    saveProductList(); //sets local storage data with new product
+    addObjToCard(newProductObj); //calls the function that adds the object to a card
 
     productForm.reset(); //resets all form fields
 });
+
+const saveProductList = () => {
+    //update local storage with new data
+    localStorage.setItem(localStorageKey, JSON.stringify(objArray)); //sets local storage data
+}
 
 const addOptionsToSelect = () => {
     objArray.forEach((product) => {
@@ -216,6 +234,17 @@ const createButton = (obj) => {
         cartArray.push(obj); //adds card to cartArray
         updatePrice(); //updates price
     });
+}
+
+const resetProductsButton = () => {
+    let resetButton = document.createElement("button");
+    resetButton.innerHTML = "Reset Store";
+    buttonDiv.append(resetButton)
+
+    resetButton.addEventListener("click", () => {
+        localStorage.removeItem(localStorageKey); //removes products from localstorage
+        location.reload(); //reloads the website
+    })
 }
 
 const updatePrice = () => {
@@ -281,6 +310,13 @@ const addObjToCard = (product) => { //render cards function
     checkbox(innerCardDiv); //puts the dropdown in the div
 }
 
+let savedProducts = localStorage.getItem(localStorageKey); //get product data => saved in a variable
+
+if (savedProducts) { //if theres data in local storage, parse it and add it to objArray
+    objArray = JSON.parse(savedProducts);
+}
+
 objArray.forEach(element => addObjToCard(element)); //allows for each object to be shown on a card, allows for buttons on every card
 showCategory(); //shows the dropdown
 addOptionsToSelect(); //shows new product dropdown
+resetProductsButton(); //shows reset button 
