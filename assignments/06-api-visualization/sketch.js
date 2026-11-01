@@ -28,8 +28,8 @@ async function setup() {
 	colorMode(HSB, 360, 100, 100);
 	angleMode(DEGREES);
 
-	topOfCanvas = (windowHeight - height)/2;
-	leftOfCanvas = (windowWidth - width)/2;
+	topOfCanvas = (windowHeight - height) / 2;
+	leftOfCanvas = (windowWidth - width) / 2;
 
 	for (let i = 0; i < 3; i++) { //creates three clouds at different positions
 		cloudArray.push(new Cloud(150 + i * 200, 70 + i * 35));
@@ -48,7 +48,7 @@ async function setup() {
 	}
 
 	let addBug = createButton("Add Fly"); //button creation
-	addBug.position(leftOfCanvas - 310, topOfCanvas + 30);
+	addBug.position(leftOfCanvas - 302, topOfCanvas + 35);
 	addBug.size(70, 30);
 	addBug.style("background-color", "gray");
 	addBug.style("font-family", "lucida console");
