@@ -1,0 +1,23 @@
+html {
+    background-color: hsl(217, 86%, 25%);
+}
+
+#encapsulation {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+#p5Sketch {
+    padding: 10px
+}
+
+#weatherApiData {
+    background-color: hsl(217, 80%, 31%);
+}
+
+h1 {
+    text-align: center;
+    color:hsl(217, 86%, 8%);
+    text-shadow: 2px -2px hsl(218, 83%, 43%);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
