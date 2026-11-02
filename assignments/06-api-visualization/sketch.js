@@ -23,7 +23,7 @@ let rainArray = [];
 
 async function setup() {
 	let canvas = createCanvas(600, 600);
-	canvas.parent("#p5Sketch");
+	canvas.parent("#p5Sketch"); //add sketch to parent div
 
 	colorMode(HSB, 360, 100, 100);
 	angleMode(DEGREES);
@@ -52,60 +52,61 @@ async function setup() {
 	addBug.size(70, 30);
 	addBug.style("background-color", "gray");
 	addBug.style("font-family", "lucida console");
-	addBug.parent("#p5Sketch");
+	addBug.parent("#p5Sketch"); //add button to parent div
 
 	addBug.mousePressed(addFly); //when button pressed a new fly is added to its corresponding array
 }
 
 function draw() {
-	if (weatherMode === "clear") { //if the toggler is false
+	if (weatherMode === "clear") { //if clear
 		background(196, 100, 100); //lighter background
 
 		sun(75);
 		pond();
 		lilyPads();
 
-		for (let f of frogArray) { //stops the jumping
+		for (let f of frogArray) { //iterates through frog array, creates frog, frogs jump at low height
 			f.createFrog();
 			f.frogJump(50);
 		}
 
-		for (let c of cloudArray) { //same as first condition
+		for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+			c.cloudX = c.cloudX % width;
 			c.cloudX = c.cloudX % width;
 			c.createCloud(75);
 			c.moveCloud();
 		}
-	} else if (weatherMode === "overcast") {
+	} else if (weatherMode === "overcast") { //if overcast
 		background(196, 100, 75); //darker background
 
-		sun(50);
+		sun(75);
 		pond();
 		lilyPads();
 		
-		for (let f of frogArray) { //iterates through array, creates frog, allows for height to be changed with slider
+		for (let f of frogArray) { //higher frog jump
 			f.createFrog();
 			f.frogJump(100);
 		}
 
-		for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+		for (let c of cloudArray) { //same as first condition
 			c.cloudX = c.cloudX % width;
-			c.createCloud(70);
+			c.createCloud(70); //darker cloud
 			c.moveCloud();
 		}
-	} else if (weatherMode === "drizzle") {
-		background(196, 100, 75); //darker background
+	} else if (weatherMode === "drizzle") { //if drizzle
+		background(196, 75, 50); //darker background
 
 		pond();
 		lilyPads();
 		
-		for (let f of frogArray) { //iterates through array, creates frog, allows for height to be changed with slider
+		for (let f of frogArray) { //higher frog jump
 			f.createFrog();
 			f.frogJump(150);
 		}
 
-		for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+		for (let c of cloudArray) { //same as first condition
 			c.cloudX = c.cloudX % width;
-			c.createCloud(50);
+			c.createCloud(50); //darker cloud
 			c.moveCloud();
 		}
 		
@@ -113,27 +114,27 @@ function draw() {
 			r.rainDown(random(1, 4));
 			r.createRain();
 		}
-	} else if (weatherMode === "rain") {
-		background(196, 100, 50); //darker background
+	} else if (weatherMode === "rain") { //if rain
+		background(196, 50, 50); //darker background
 
 		pond();
 		lilyPads();
 		
-		for (let f of frogArray) { //iterates through array, creates frog, allows for height to be changed with slider
+		for (let f of frogArray) { //frogs jump at their highest height
 			f.createFrog();
 			f.frogJump(200);
 		}
 
-		for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+		for (let c of cloudArray) { //same as first condition
 			c.cloudX = c.cloudX % width;
 			c.createCloud(50);
 			c.moveCloud();
 		}
 		
-		for (let r of rainArray) { //iterates through array, creates rain and rain down
+		for (let r of rainArray) { //rains down at faster speeds
 			r.rainDown(random(4, 7));
 			r.createRain();
 		}
-	}
+	} 
 	drawFly(); //calls function that draws the flies
 }

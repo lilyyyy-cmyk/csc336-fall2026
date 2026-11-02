@@ -1,22 +1,24 @@
+//div variables
 let weatherSketch = document.querySelector("#p5Sketch");
 let weatherData = document.querySelector("#weatherApiData");
 let weatherGraph = document.querySelector("#weatherApiGraph");
-let weatherChart = document.querySelector("#weatherChart");
+let weatherChart = document.querySelector("#weatherChart"); //canvas variable
 
-let weatherMode = "clear";
+let weatherMode = "clear"; //initial assignment for weatherMode
 
-async function getWeather() {
+async function getWeather() { //fetches open-meteo data I specified
     let response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&daily=temperature_2m_min,temperature_2m_max,weather_code,daylight_duration&hourly=temperature_2m,wind_speed_10m,precipitation,relative_humidity_2m,weather_code&current=precipitation,is_day,temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch");
-    let json = await response.json();
-    return json;
+    let json = await response.json(); //jsonifies the data
+    return json; //returns jsonified data
 }
 
 async function showWeather() {
-    try {
-        let data = await getWeather();
-        let current = data.current;
-        let currentUnits = data.current_units;
+    try { //no error
+        let data = await getWeather(); //calls fetch function
+        let current = data.current; //stores current weather data
+        let currentUnits = data.current_units; //units of current weather data
 
+        //lists some stored data with units
         weatherData.innerHTML = `
         <h3>Current Weather Data</h3>
         <p>Latitude: ${data.latitude}</p>
@@ -28,7 +30,7 @@ async function showWeather() {
         <p>Humidity: ${current.relative_humidity_2m} ${currentUnits.relative_humidity_2m}</p>`;
     }
 
-    catch (err) {
+    catch (err) { //error
         weatherData.textContent = "Couldn't Load Weather";
         console.error(err);
     }
@@ -37,12 +39,14 @@ async function showWeather() {
 async function showWeatherCode() {
     try {
         let data = await getWeather();
-        let code = data.hourly.weather_code;
+        let code = data.current.weather_code; //stores current weather_code data
 
+        //shortened if/else statements for more clarity in the draw() function
         if (code === 0) weatherMode = "clear";
         else if (code > 0 && code <= 3) weatherMode = "overcast";
         else if (code >= 51 && code <= 55) weatherMode = "drizzle";
         else if (code >= 61 && code <= 65) weatherMode = "rain";
+        else weatherMode = "overcast"; //only specified some codes, there's too many
     }
     
     catch (err) {
@@ -54,70 +58,71 @@ async function showWeatherCode() {
 async function showGraph() {
     try {
         let data = await getWeather();
-        let hourly = data.hourly;
-        let hourlyUnits = data.hourly_units;
+        let hourly = data.hourly; //stores hourly data
+        let hourlyUnits = data.hourly_units; //hourly data units
 
         
-        const COUNT = 9;
-        const STEP = 3;
+        const COUNT = 9; //amount of times shown
+        const STEP = 3; //step amount for hours
 
-        const everySixth = (time) => time.filter((_, i) => i % STEP === 0).slice(0, COUNT);
-        const labels = everySixth(hourly.time).map(t => t.slice(11));
+        //function that filters through hours by the step amount, starts from 0-COUNT value
+        const everyThird = (time) => time.filter((_, i) => i % STEP === 0).slice(0, COUNT);
+        const labels = everyThird(hourly.time).map(t => t.slice(11)); //gets rid of unnecessary characters
 
-        const weather = {
+        const weather = { //weather data for graph
             labels: labels,
             datasets: [
                 {
-                    label: `Temperature ${hourlyUnits.temperature_2m}`,
-                    data: everySixth(hourly.temperature_2m),
-                    borderColor: "rgba(0, 255, 0, 1)",
-                    backgroundColor: "rgba(0, 255, 0, 0.5)",
+                    label: `Temperature ${hourlyUnits.temperature_2m}`, //label with units
+                    data: everyThird(hourly.temperature_2m), //stepped hourly data
+                    borderColor: "rgba(0, 255, 0, 1)", //legend border color
+                    backgroundColor: "rgba(0, 255, 0, 0.5)", //legend background color
                 },
                 {
                     label: `Wind Speed ${hourlyUnits.wind_speed_10m}`,
-                    data: everySixth(hourly.wind_speed_10m),
+                    data: everyThird(hourly.wind_speed_10m),
                     borderColor: "rgba(128, 0, 255, 1)",
                     backgroundColor: "rgba(128, 0, 255, 0.5)",
                 },
                 {
                     label: `Precipitation ${hourlyUnits.precipitation}`,
-                    data: everySixth(hourly.precipitation),
+                    data: everyThird(hourly.precipitation),
                     borderColor: "rgba(0, 0, 255, 1)",
                     backgroundColor: "rgba(0, 0, 255, 0.5)",
                 },
                 {
                     label: `Humidity ${hourlyUnits.relative_humidity_2m}`,
-                    data: everySixth(hourly.relative_humidity_2m),
+                    data: everyThird(hourly.relative_humidity_2m),
                     borderColor: "rgba(255, 255, 0, 1)",
                     backgroundColor: "rgba(255, 255, 0, 0.5)",
                 },
                 {
                     label: `Weather Code ${hourlyUnits.weather_code}`,
-                    data: everySixth(hourly.weather_code),
+                    data: everyThird(hourly.weather_code),
                     borderColor: "rgba(255, 0, 255, 1)",
                     backgroundColor: "rgba(255, 0, 255, 0.5)",
                 }
             ]
         }
 
-        const config = {
-            type: "line",
-            data: weather,
+        const config = { //configures the chart
+            type: "line", //line chart
+            data: weather, //takes data from previously defined
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: "top",
+                        position: "top", //puts legend at the top
                     },
                     title: {
                         display: true,
-                        text: "Open-Meteo Api Hourly Data"
+                        text: "Open-Meteo Api Hourly Data" //title of chart
                     }
                 }
             }
         };
-        Chart.defaults.font.family = "'Lucida Console'";
-        new Chart(weatherChart, config);
+        Chart.defaults.font.family = "'Lucida Console'"; //changes font for entire chart
+        new Chart(weatherChart, config); //creates config in specified canvas
     }
 
     catch (err) {
@@ -126,6 +131,7 @@ async function showGraph() {
     }
 }
 
+//function calls
 showWeather();
 showWeatherCode();
 showGraph();

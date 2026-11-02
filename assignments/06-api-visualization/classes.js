@@ -81,7 +81,7 @@ class Cloud { //cloud class
 	createCloud(b) { //draws cloud
 		noStroke();
 		
-		fill(0, 0, b);
+		fill(0, 0, b); //takes a variable for the brightness
 		ellipse(this.cloudX + 10, this.cloudY, 200, 90);
 		ellipse(this.cloudX - 20, this.cloudY + 20, 200, 70);
 		ellipse(this.cloudX + 40, this.cloudY + 20, 200, 70);
@@ -107,7 +107,7 @@ class Rain { //rain class
 	}
 
 	rainDown(speed) { //allows the rain to rain down
-		this.y += speed; //moves rain down
+		this.y += speed; //moves rain down, takes a variable for the speed
 		if (this.y >= 550) { //if y span is or greater than the specified length
 			this.y = this.cloud.cloudY + 50; //equals the span of the y minus 50
 		}

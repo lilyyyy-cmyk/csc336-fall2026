@@ -14,10 +14,6 @@ html {
     background-color: hsl(217, 79%, 17%);
 }
 
-/* #weatherEncap {
-    
-} */
-
 #weatherApiData {
     width: 600px;
     margin: 0 auto;
