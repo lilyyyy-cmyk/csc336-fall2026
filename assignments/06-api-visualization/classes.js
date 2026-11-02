@@ -78,10 +78,10 @@ class Cloud { //cloud class
 		this.speed = random(1, 2); //randomized speed
 	}
 	
-	createCloud() { //draws cloud
+	createCloud(b) { //draws cloud
 		noStroke();
 		
-		fill(0, 0, 75);
+		fill(0, 0, b);
 		ellipse(this.cloudX + 10, this.cloudY, 200, 90);
 		ellipse(this.cloudX - 20, this.cloudY + 20, 200, 70);
 		ellipse(this.cloudX + 40, this.cloudY + 20, 200, 70);
@@ -97,7 +97,6 @@ class Rain { //rain class
 		this.cloud = cloud; //relative cloud object
 		this.offset = offset; //offset of the rain
 		this.y = random(cloud.cloudY + 50, 500); //y span of rain on cloud
-		this.speed = random(4, 7); //randomized speed
 	}
 
 	createRain() { //creates rain
@@ -107,8 +106,8 @@ class Rain { //rain class
 		line(x, this.y - 10, x, this.y + 5);
 	}
 
-	rainDown() { //allows the rain to rain down
-		this.y += this.speed; //moves rain down
+	rainDown(speed) { //allows the rain to rain down
+		this.y += speed; //moves rain down
 		if (this.y >= 550) { //if y span is or greater than the specified length
 			this.y = this.cloud.cloudY + 50; //equals the span of the y minus 50
 		}

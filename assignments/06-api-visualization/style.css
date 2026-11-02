@@ -8,27 +8,38 @@ html {
 }
 
 #p5Sketch {
-    padding: 10px
+    padding: 10px;
+    margin-right: 10px;
+    width: 600px;
+    background-color: hsl(217, 79%, 17%);
 }
 
-#weatherEncap {
-    padding-top: 50px;
-}
+/* #weatherEncap {
+    
+} */
 
 #weatherApiData {
-    /* padding: 0.5px; */
+    width: 600px;
+    margin: 0 auto;
     background-color: hsl(217, 79%, 17%);
     color: hsl(240, 0.5%, 39.8%);
     font-family: 'Lucida Console', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #weatherApiGraph {
+    width: 600px;
+    margin: 0 auto;
     background-color: hsl(217, 79%, 17%);   
 }
 
 h1 {
     text-align: center;
-    color: hsl(217, 79%, 17%);
-    text-shadow: 2px -2px hsla(240, 0%, 40%, 0.5);
+    background-color: hsl(217, 79%, 17%);
+    color: hsl(240, 0.5%, 39.8%, 0.5);
+    text-shadow: 3px -2px hsl(218, 86%, 9%);
     font-family: 'Lucida Console', 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h3 {
+    text-align: center;
 }

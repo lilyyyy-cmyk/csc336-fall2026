@@ -1,3 +1,10 @@
+function sun(b) { //draws sun
+	noStroke();
+
+	fill(62, 100, b);
+	circle(550, 50, 75);
+}
+
 function pond() { //draws pond
 	noStroke();
 	
