@@ -48,7 +48,7 @@ async function setup() {
 	}
 
 	let addBug = createButton("Add Fly"); //button creation
-	addBug.position(leftOfCanvas - 302, topOfCanvas + 35);
+	addBug.position(leftOfCanvas - 302, topOfCanvas + 45);
 	addBug.size(70, 30);
 	addBug.style("background-color", "gray");
 	addBug.style("font-family", "lucida console");
