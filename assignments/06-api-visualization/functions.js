@@ -1,7 +1,7 @@
-function sun(b) { //draws sun
+function sun(s, b) { //draws sun
 	noStroke();
 
-	fill(62, 100, b);
+	fill(62, s, b);
 	circle(550, 50, 75);
 }
 

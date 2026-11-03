@@ -58,83 +58,164 @@ async function setup() {
 }
 
 function draw() {
-	if (weatherMode === "clear") { //if clear
-		background(196, 100, 100); //lighter background
+	if (dayCycle === "day") { //if day
+		if (weatherMode === "clear") { //if clear
+			background(196, 100, 100); //lighter background
 
-		sun(75);
-		pond();
-		lilyPads();
+			sun(100, 75);
+			pond();
+			lilyPads();
 
-		for (let f of frogArray) { //iterates through frog array, creates frog, frogs jump at low height
-			f.createFrog();
-			f.frogJump(50);
-		}
+			for (let f of frogArray) { //iterates through frog array, creates frog, frogs jump at low height
+				f.createFrog();
+				f.frogJump(50);
+			}
 
-		for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
-			c.cloudX = c.cloudX % width;
-			c.cloudX = c.cloudX % width;
-			c.createCloud(75);
-			c.moveCloud();
-		}
-	} else if (weatherMode === "overcast") { //if overcast
-		background(196, 100, 75); //darker background
+			for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+				c.cloudX = c.cloudX % width;
+				c.cloudX = c.cloudX % width;
+				c.createCloud(75);
+				c.moveCloud();
+			}
+		} else if (weatherMode === "overcast") { //if overcast
+			background(196, 100, 75); //darker background
 
-		sun(75);
-		pond();
-		lilyPads();
-		
-		for (let f of frogArray) { //higher frog jump
-			f.createFrog();
-			f.frogJump(100);
-		}
+			sun(100, 75);
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //higher frog jump
+				f.createFrog();
+				f.frogJump(100);
+			}
 
-		for (let c of cloudArray) { //same as first condition
-			c.cloudX = c.cloudX % width;
-			c.createCloud(70); //darker cloud
-			c.moveCloud();
-		}
-	} else if (weatherMode === "drizzle") { //if drizzle
-		background(196, 75, 50); //darker background
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(70); //darker cloud
+				c.moveCloud();
+			}
+		} else if (weatherMode === "drizzle") { //if drizzle
+			background(196, 75, 50); //darker background
 
-		pond();
-		lilyPads();
-		
-		for (let f of frogArray) { //higher frog jump
-			f.createFrog();
-			f.frogJump(150);
-		}
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //higher frog jump
+				f.createFrog();
+				f.frogJump(150);
+			}
 
-		for (let c of cloudArray) { //same as first condition
-			c.cloudX = c.cloudX % width;
-			c.createCloud(50); //darker cloud
-			c.moveCloud();
-		}
-		
-		for (let r of rainArray) { //iterates through array, creates rain and rain down
-			r.rainDown(random(1, 4));
-			r.createRain();
-		}
-	} else if (weatherMode === "rain") { //if rain
-		background(196, 50, 50); //darker background
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(50); //darker cloud
+				c.moveCloud();
+			}
+			
+			for (let r of rainArray) { //iterates through array, creates rain and rain down
+				r.rainDown(random(1, 4));
+				r.createRain();
+			}
+		} else if (weatherMode === "rain") { //if rain
+			background(196, 50, 50); //darker background
 
-		pond();
-		lilyPads();
-		
-		for (let f of frogArray) { //frogs jump at their highest height
-			f.createFrog();
-			f.frogJump(200);
-		}
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //frogs jump at their highest height
+				f.createFrog();
+				f.frogJump(200);
+			}
 
-		for (let c of cloudArray) { //same as first condition
-			c.cloudX = c.cloudX % width;
-			c.createCloud(50);
-			c.moveCloud();
-		}
-		
-		for (let r of rainArray) { //rains down at faster speeds
-			r.rainDown(random(4, 7));
-			r.createRain();
-		}
-	} 
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(50);
+				c.moveCloud();
+			}
+			
+			for (let r of rainArray) { //rains down at faster speeds
+				r.rainDown(random(4, 7));
+				r.createRain();
+			}
+		} 
+	} else {
+		if (weatherMode === "clear") { //if clear
+			background(196, 100, 30); //lighter background
+
+			sun(25, 100);
+			pond();
+			lilyPads();
+
+			for (let f of frogArray) { //iterates through frog array, creates frog, frogs jump at low height
+				f.createFrog();
+				f.frogJump(50);
+			}
+
+			for (let c of cloudArray) { //iterates through array, makes sure clouds restart after reaching end of canvas while moving
+				c.cloudX = c.cloudX % width;
+				c.cloudX = c.cloudX % width;
+				c.createCloud(75);
+				c.moveCloud();
+			}
+		} else if (weatherMode === "overcast") { //if overcast
+			background(196, 75, 30); //darker background
+
+			sun(25, 75);
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //higher frog jump
+				f.createFrog();
+				f.frogJump(100);
+			}
+
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(70); //darker cloud
+				c.moveCloud();
+			}
+		} else if (weatherMode === "drizzle") { //if drizzle
+			background(196, 50, 25); //darker background
+
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //higher frog jump
+				f.createFrog();
+				f.frogJump(150);
+			}
+
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(50); //darker cloud
+				c.moveCloud();
+			}
+			
+			for (let r of rainArray) { //iterates through array, creates rain and rain down
+				r.rainDown(random(1, 4));
+				r.createRain();
+			}
+		} else if (weatherMode === "rain") { //if rain
+			background(196, 50, 15); //darker background
+
+			pond();
+			lilyPads();
+			
+			for (let f of frogArray) { //frogs jump at their highest height
+				f.createFrog();
+				f.frogJump(200);
+			}
+
+			for (let c of cloudArray) { //same as first condition
+				c.cloudX = c.cloudX % width;
+				c.createCloud(50);
+				c.moveCloud();
+			}
+			
+			for (let r of rainArray) { //rains down at faster speeds
+				r.rainDown(random(4, 7));
+				r.createRain();
+			}
+		} 
+	}
 	drawFly(); //calls function that draws the flies
 }

@@ -5,6 +5,7 @@ let weatherGraph = document.querySelector("#weatherApiGraph");
 let weatherChart = document.querySelector("#weatherChart"); //canvas variable
 
 let weatherMode = "clear"; //initial assignment for weatherMode
+let dayCycle = "day";
 
 async function getWeather() { //fetches open-meteo data I specified
     let response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&daily=temperature_2m_min,temperature_2m_max,weather_code,daylight_duration&hourly=temperature_2m,wind_speed_10m,precipitation,relative_humidity_2m,weather_code&current=precipitation,is_day,temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch");
@@ -27,11 +28,27 @@ async function showWeather() {
         <p>Temperature: ${current.temperature_2m} ${currentUnits.temperature_2m}</p>
         <p>Precipitation: ${current.precipitation} ${currentUnits.precipitation}</p>
         <p>Wind Speed: ${current.wind_speed_10m} ${currentUnits.wind_speed_10m}</p>
-        <p>Humidity: ${current.relative_humidity_2m} ${currentUnits.relative_humidity_2m}</p>`;
+        <p>Humidity: ${current.relative_humidity_2m} ${currentUnits.relative_humidity_2m}</p>
+        <p>Weather Code: ${current.weather_code} ${currentUnits.weather_code}</p>`;
     }
 
     catch (err) { //error
         weatherData.textContent = "Couldn't Load Weather";
+        console.error(err);
+    }
+}
+
+async function isDay() {
+    try {
+        let data = await getWeather();
+        let day = data.current.is_day;
+
+        if (day === 1) dayCycle = "day";
+        else dayCycle = "night";
+    }
+    
+    catch (err) {
+        weatherSketch.textContent = "Couldn't Load Sketch";
         console.error(err);
     }
 }
@@ -133,5 +150,6 @@ async function showGraph() {
 
 //function calls
 showWeather();
+isDay();
 showWeatherCode();
 showGraph();
