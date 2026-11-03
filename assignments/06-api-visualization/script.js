@@ -41,8 +41,9 @@ async function showWeather() {
 async function isDay() {
     try {
         let data = await getWeather();
-        let day = data.current.is_day;
+        let day = data.current.is_day; //stores current is_day data
 
+        //shortened if/else statements for more clarity in draw()
         if (day === 1) dayCycle = "day";
         else dayCycle = "night";
     }
